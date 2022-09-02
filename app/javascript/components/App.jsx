@@ -1,5 +1,5 @@
 import React from  "react"
-import { Switch, Route, Link } from 'react-router-dom'
+import { Routes, Route, Link } from 'react-router-dom'
 import styled from "styled-components"
 import { AddTodo } from "./AddTodo"
 import { TodoList } from "./TodoList"
@@ -47,22 +47,29 @@ export const App = () => {
   return (
     <>
       <Navbar>
-          <Logo>
-            TODO
-          </Logo>
-          <NavItems>
-            <NavItem>
-              <Link to="/todos">
-                Todos
-              </Link>
-            </NavItem>
-            <NavItem>
-              <Link to="/todos/new">
-                Add New Todo
-              </Link>
-            </NavItem>
-          </NavItems>
-        </Navbar>
+        <Logo>
+          TODO
+        </Logo>
+        <NavItems>
+          <NavItem>
+            <Link to="/todos">
+              Todos
+            </Link>
+          </NavItem>
+          <NavItem>
+            <Link to="/todos/new">
+              Add New Todo
+            </Link>
+          </NavItem>
+        </NavItems>
+      </Navbar>
+      <Wrapper>
+        <Routes>
+          <Route path="/todos" element={<TodoList />} />
+          <Route path="/todos/new" element={<AddTodo />} />
+          <Route path="/todos/:id/edit" element={< EditTodo/>} />
+        </Routes>
+      </Wrapper>
     </>
   );
 };
