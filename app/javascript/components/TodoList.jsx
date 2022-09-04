@@ -77,7 +77,7 @@ export const TodoList = () => {
   useEffect(() => {
     axios.get("/api/v1/todos.json")
     .then(resp => {
-      console.log(resp.data)
+      // console.log(resp.data)
       setTodos(resp.data);
     })
     .catch(e => {
@@ -137,22 +137,22 @@ export const TodoList = () => {
             return val
           }
         }).map((val, key) => {
-          return (
-            <Row key={key}>
-              {val.is_completed ? (
-                <CheckedBox>
-                  <ImCheckboxChecked onClick={() => updateIsCompleted(key, val) } />
-                </CheckedBox>
-              ) : (
-                <UncheckedBox>
-                  <ImCheckboxUnChecked onClick={() => updateIsCompleted(key, val) } />
-                </UncheckedBox>
-              )}
-              <TodoName is_completed={val.is_completed}>
-                {val.name}
-              </TodoName>
-            </Row>
-          )
+          // return (
+          //   <Row key={key}>
+          //     {val.is_completed ? (
+          //       <CheckedBox>
+          //         <ImCheckboxChecked onClick={() => updateIsCompleted(key, val) } />
+          //       </CheckedBox>
+          //     ) : (
+          //       <UncheckedBox>
+          //         <ImCheckboxUnChecked onClick={() => updateIsCompleted(key, val) } />
+          //       </UncheckedBox>
+          //     )}
+          //     <TodoName is_completed={val.is_completed}>
+          //       {val.name}
+          //     </TodoName>
+          //   </Row>
+          // );
         })}
       </div>
     </>
