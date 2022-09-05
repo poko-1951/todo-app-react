@@ -19,8 +19,8 @@ class Api::V1::TodosController < ApplicationController
   end
 
   def update
-    update = Todo.find(params[:id])
-    if todo.udpate
+    todo = Todo.find(params[:id])
+    if todo.update(todo_params)
       render json: todo
     else
       render json: todo.errors, status: 422
@@ -45,6 +45,6 @@ class Api::V1::TodosController < ApplicationController
 
   private
   def todo_params
-    params.require(:todo).permit(:name, :is_completed)
+    params.require(:todo).permit(:id, :name, :is_completed)
   end
 end

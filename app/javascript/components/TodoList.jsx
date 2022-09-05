@@ -2,7 +2,7 @@ import React, { useState, useEffect} from  "react"
 import { Link } from "react-router-dom"
 import axios from "axios"
 import styled from "styled-components"
-import { ImCheckboxChecked, ImCheckboxUnChecked } from "react-icons/im"
+import { ImCheckboxChecked, ImCheckboxUnchecked } from "react-icons/im"
 import { AiFillCodeSandboxCircle, AiFillEdit } from "react-icons/ai"
 import { ValidationError } from "schema-utils"
 
@@ -77,7 +77,7 @@ export const TodoList = () => {
   useEffect(() => {
     axios.get("/api/v1/todos.json")
     .then(resp => {
-      console.log(resp.data)
+      // console.log(resp.data)
       setTodos(resp.data);
     })
     .catch(e => {
@@ -102,9 +102,9 @@ export const TodoList = () => {
     let data = {
       id: val.id,
       name: val.name,
-      is_completed: val.is_completed
+      is_completed: !val.is_completed
     }
-    axios.patch("/api/v1/todos/${val.id}", data)
+    axios.patch(`/api/v1/todos/${val.id}`, data)
     .then(resp => {
       const newTodos = [...todos];
       newTodos[index].is_completed = resp.data.is_completed;
@@ -145,14 +145,19 @@ export const TodoList = () => {
                 </CheckedBox>
               ) : (
                 <UncheckedBox>
-                  <ImCheckboxUnChecked onClick={() => updateIsCompleted(key, val) } />
+                  <ImCheckboxUnchecked onClick={() => updateIsCompleted(key, val) } />
                 </UncheckedBox>
               )}
               <TodoName is_completed={val.is_completed}>
                 {val.name}
               </TodoName>
+              <Link to={"/todos/" + val.id + "/edit"}>
+                <EditButton>
+                  <AiFillEdit />
+                </EditButton>
+              </Link>
             </Row>
-          )
+          );
         })}
       </div>
     </>
